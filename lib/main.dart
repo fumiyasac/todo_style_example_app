@@ -102,7 +102,7 @@ class HomePage extends StatelessWidget {
                       foregroundColor: Colors.blue.shade700,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     onPressed: () => showModalBottomSheet(
