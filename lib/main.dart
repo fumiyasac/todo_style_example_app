@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'common/show_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -107,13 +108,7 @@ class HomePage extends StatelessWidget {
                     ),
                     onPressed: () => showModalBottomSheet(
                       context: context,
-                      builder: (context) => Container(
-                        height: MediaQuery.of(context).size.height * 0.80,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
+                      builder: (context) => AddNewTaskModel(),
                     ),
                     child: Text(
                       "+ New Task",
