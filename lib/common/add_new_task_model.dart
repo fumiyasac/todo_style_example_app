@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:todo_style_example_app/constants/app_style.dart';
 import 'package:todo_style_example_app/widget/text_field_widget.dart';
 
+import '../widget/date_time_widget.dart';
 import '../widget/radio_widget.dart';
 
 class AddNewTaskModel extends StatelessWidget {
@@ -66,6 +67,14 @@ class AddNewTaskModel extends StatelessWidget {
               Expanded(
                   child: RadioWidget(titleRadio: "GEN", categoryColor: Colors.amberAccent.shade700)
               ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              DateTimeWidget(titleText: 'Date', valueText: 'dd/mm/yy', iconSection: Icons.calendar_month),
+              Gap(22),
+              DateTimeWidget(titleText: 'Time', valueText: 'hh : mm', iconSection: Icons.watch_later_outlined),
             ],
           ),
         ],
