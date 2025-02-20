@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'common/show_model.dart';
+import 'common/add_new_task_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -107,6 +107,10 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     onPressed: () => showModalBottomSheet(
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                       context: context,
                       builder: (context) => AddNewTaskModel(),
                     ),
