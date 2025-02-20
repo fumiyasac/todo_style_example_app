@@ -13,7 +13,7 @@ class AddNewTaskModel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(30),
-      height: MediaQuery.of(context).size.height * 0.70,
+      height: MediaQuery.of(context).size.height * 0.73,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -75,6 +75,52 @@ class AddNewTaskModel extends StatelessWidget {
               DateTimeWidget(titleText: 'Date', valueText: 'dd/mm/yy', iconSection: Icons.calendar_month),
               Gap(22),
               DateTimeWidget(titleText: 'Time', valueText: 'hh : mm', iconSection: Icons.watch_later_outlined),
+            ],
+          ),
+          Gap(12),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.blue.shade800,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    side: BorderSide(
+                      color: Colors.blue.shade800
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 14,
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Text('Cancel'),
+                ),
+              ),
+              Gap(20),
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue.shade800,
+                    foregroundColor: Colors.white,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    side: BorderSide(
+                        color: Colors.blue.shade800
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 14,
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Text('Create'),
+                ),
+              ),
             ],
           ),
         ],
