@@ -60,28 +60,28 @@ class AddNewTaskModel extends ConsumerWidget {
           Row(
             children: [
               Expanded(
-                  child: RadioWidget(
-                    titleRadio: "LRN",
-                    categoryColor: Colors.green,
-                    valueInput: 1,
-                    onChangeValue: () => ref.read(radioProvider.notifier).update((state) => 1),
-                  ),
+                child: RadioWidget(
+                  titleRadio: "LRN",
+                  categoryColor: Colors.green,
+                  valueInput: 1,
+                  onChangeValue: () => ref.read(radioProvider.notifier).update((state) => 1),
+                ),
               ),
               Expanded(
-                  child: RadioWidget(
-                    titleRadio: "WRK",
-                    categoryColor: Colors.blue.shade700,
-                    valueInput: 2,
-                    onChangeValue: () => ref.read(radioProvider.notifier).update((state) => 2),
-                  ),
+                child: RadioWidget(
+                  titleRadio: "WRK",
+                  categoryColor: Colors.blue.shade700,
+                  valueInput: 2,
+                  onChangeValue: () => ref.read(radioProvider.notifier).update((state) => 2),
+                ),
               ),
               Expanded(
-                  child: RadioWidget(
-                    titleRadio: "GEN",
-                    categoryColor: Colors.amberAccent.shade700,
-                    valueInput: 3,
-                    onChangeValue: () => ref.read(radioProvider.notifier).update((state) => 3),
-                  ),
+                child: RadioWidget(
+                  titleRadio: "GEN",
+                  categoryColor: Colors.amberAccent.shade700,
+                  valueInput: 3,
+                  onChangeValue: () => ref.read(radioProvider.notifier).update((state) => 3),
+                ),
               ),
             ],
           ),
