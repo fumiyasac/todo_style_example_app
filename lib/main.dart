@@ -128,6 +128,37 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
+              Gap(20),
+
+              // TODO: CardView
+              Container(
+                width: double.infinity,
+                height: 130,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      color: Colors.red,
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text('Learning Web Developer'),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
