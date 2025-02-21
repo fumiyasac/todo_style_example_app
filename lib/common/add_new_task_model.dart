@@ -92,12 +92,22 @@ class AddNewTaskModel extends ConsumerWidget {
                 titleText: 'Date',
                 valueText: 'dd/mm/yy',
                 iconSection: Icons.calendar_month,
+                onTap: () => showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2020),
+                  lastDate: DateTime(2030)
+                ),
               ),
               Gap(22),
               DateTimeWidget(
                 titleText: 'Time',
                 valueText: 'hh : mm',
                 iconSection: Icons.watch_later_outlined,
+                onTap: () => showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                ),
               ),
             ],
           ),
