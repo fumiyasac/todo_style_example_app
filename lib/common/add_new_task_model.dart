@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_style_example_app/constants/app_style.dart';
 import 'package:todo_style_example_app/provider/radio_provider.dart';
 import 'package:todo_style_example_app/widget/text_field_widget.dart';
 import 'package:todo_style_example_app/widget/date_time_widget.dart';
 import 'package:todo_style_example_app/widget/radio_widget.dart';
+import 'package:todo_style_example_app/provider/date_time_provider.dart';
 
 class AddNewTaskModel extends ConsumerWidget {
   const AddNewTaskModel({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final date = ref.watch(dateProvider);
+    final time = ref.watch(timeProvider);
+
     return Container(
       padding: EdgeInsets.all(30),
       height: MediaQuery.of(context).size.height * 0.73,
@@ -90,24 +95,39 @@ class AddNewTaskModel extends ConsumerWidget {
             children: [
               DateTimeWidget(
                 titleText: 'Date',
-                valueText: 'dd/mm/yy',
+                valueText: date,
                 iconSection: Icons.calendar_month,
-                onTap: () => showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2020),
-                  lastDate: DateTime(2030)
-                ),
+                onTap: () async {
+                  final getDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2020),
+                    lastDate: DateTime(2030)
+                  );
+                  if (getDate != null) {
+                    final format = DateFormat.yMd();
+                    ref
+                      .read(dateProvider.notifier)
+                      .update((state) => format.format(getDate));
+                  }
+                },
               ),
               Gap(22),
               DateTimeWidget(
                 titleText: 'Time',
-                valueText: 'hh : mm',
+                valueText: time,
                 iconSection: Icons.watch_later_outlined,
-                onTap: () => showTimePicker(
-                  context: context,
-                  initialTime: TimeOfDay.now(),
-                ),
+                onTap: () async {
+                  final getTime = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+                  if (getTime != null) {
+                      ref
+                        .read(timeProvider.notifier)
+                        .update((state) => getTime.format(context));
+                  }
+                }
               ),
             ],
           ),
