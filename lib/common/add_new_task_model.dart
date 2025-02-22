@@ -150,7 +150,7 @@ class AddNewTaskModel extends ConsumerWidget {
                       vertical: 14,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () => Navigator.pop(context),
                   child: Text('Cancel'),
                 ),
               ),
