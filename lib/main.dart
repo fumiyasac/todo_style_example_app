@@ -130,7 +130,13 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               Gap(20),
-              CardTodoWidget(),
+              ListView.builder(
+                itemCount: 1,
+                shrinkWrap: true,
+                itemBuilder: (context, index) => Expanded(
+                  child: CardTodoWidget(),
+                ),
+              ),
             ],
           ),
         ),
