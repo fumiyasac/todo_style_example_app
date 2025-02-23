@@ -70,7 +70,8 @@ class CardTodoWidget extends ConsumerWidget {
                             activeColor: Colors.blue.shade800,
                             shape: CircleBorder(),
                             value: todoData[getIndex].isDone,
-                            onChanged: (value) => print(value),
+                            onChanged: (value) => ref.read(todoProvider)
+                              .updateTask(todoData[getIndex].docID, value),
                           ),
                         ),
                       ),

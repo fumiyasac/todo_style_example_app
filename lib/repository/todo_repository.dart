@@ -7,4 +7,14 @@ class TodoRepository {
   void addNewTask(TodoModel model) {
     todoCollection.add(model.toMap());
   }
+
+  void updateTask(String? docID, bool? valueUpdate) {
+    todoCollection.doc(docID).update({
+      'isDone': valueUpdate,
+    });
+  }
+
+  void deleteTask(String? docID) {
+    todoCollection.doc(docID).delete();
+  }
 }
