@@ -3,17 +3,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_style_example_app/constants/app_style.dart';
-import 'package:todo_style_example_app/provider/radio_provider.dart';
+import 'package:todo_style_example_app/model/todo_model.dart';
 import 'package:todo_style_example_app/widget/text_field_widget.dart';
 import 'package:todo_style_example_app/widget/date_time_widget.dart';
 import 'package:todo_style_example_app/widget/radio_widget.dart';
 import 'package:todo_style_example_app/provider/date_time_provider.dart';
+import 'package:todo_style_example_app/provider/radio_provider.dart';
+import 'package:todo_style_example_app/provider/todo_provider.dart';
 
 class AddNewTaskModel extends ConsumerWidget {
   AddNewTaskModel({
     super.key
   });
 
+  final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
@@ -21,6 +24,8 @@ class AddNewTaskModel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final date = ref.watch(dateProvider);
     final time = ref.watch(timeProvider);
+    final todo = ref.watch(todoProvider);
+    final radio = ref.watch(radioProvider);
 
     return Container(
       padding: EdgeInsets.all(30),
@@ -184,7 +189,30 @@ class AddNewTaskModel extends ConsumerWidget {
                       vertical: 14,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    String category = '';
+                    switch (radio) {
+                      case 1:
+                        category = 'Learning';
+                        break;
+                      case 2:
+                        category = 'Working';
+                        break;
+                      case 3:
+                        category = 'General';
+                        break;
+                    }
+
+                    todo.addNewTask(
+                      TodoModel(
+                        titleTask: titleController.text,
+                        description: descriptionController.text,
+                        category: category,
+                        dateTask: date,
+                        timeTask: time,
+                      )
+                    );
+                  },
                   child: Text('Create'),
                 ),
               ),
