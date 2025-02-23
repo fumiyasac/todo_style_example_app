@@ -223,6 +223,10 @@ class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
                         timeTask: time,
                       )
                     );
+                    ref.read(radioProvider.notifier).update((state) => 0);
+                    ref.read(dateProvider.notifier).update((state) => "dd/mm/yy");
+                    ref.read(timeProvider.notifier).update((state) => "hh : mm");
+                    Navigator.pop(context);
                   },
                   child: Text('Create'),
                 ),
