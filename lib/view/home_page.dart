@@ -110,7 +110,7 @@ class HomePage extends ConsumerWidget {
               ),
               Gap(20),
               ListView.builder(
-                itemCount: todoData.value!.length,
+                itemCount: todoData.value?.length ?? 0,
                 shrinkWrap: true,
                 itemBuilder: (context, index) => CardTodoWidget(
                   getIndex: index,
