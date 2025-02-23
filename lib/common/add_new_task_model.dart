@@ -10,7 +10,12 @@ import 'package:todo_style_example_app/widget/radio_widget.dart';
 import 'package:todo_style_example_app/provider/date_time_provider.dart';
 
 class AddNewTaskModel extends ConsumerWidget {
-  const AddNewTaskModel({super.key});
+  AddNewTaskModel({
+    super.key
+  });
+
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -49,14 +54,22 @@ class AddNewTaskModel extends ConsumerWidget {
             style: AppStyle.headingOne,
           ),
           const Gap(6),
-          TextFieldWidget(hintText: "Add Task Name", maxLines: 1),
+          TextFieldWidget(
+            hintText: "Add Task Name",
+            maxLines: 1,
+            textEditingController: titleController,
+          ),
           const Gap(12),
           Text(
             "Description",
             style: AppStyle.headingOne,
           ),
           const Gap(6),
-          TextFieldWidget(hintText: "Add Descriptions", maxLines: 5),
+          TextFieldWidget(
+            hintText: "Add Descriptions",
+            maxLines: 5,
+            textEditingController: descriptionController,
+          ),
           const Gap(12),
           Text(
             "Category",
