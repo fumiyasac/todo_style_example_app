@@ -58,8 +58,11 @@ class CardTodoWidget extends ConsumerWidget {
                     children: [
                       ListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: Text(todoData[getIndex].titleTask),
+                        title: Text(todoData[getIndex].titleTask,
+                          maxLines: 1,
+                        ),
                         subtitle: Text(todoData[getIndex].description,
+                          maxLines: 1,
                           style: TextStyle(
                             color: Colors.grey,
                           ),
