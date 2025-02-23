@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:todo_style_example_app/common/add_new_task_model.dart';
+import 'package:todo_style_example_app/provider/todo_provider.dart';
 import 'package:todo_style_example_app/widget/card_todo_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todoData = ref.watch(fetchStreamTodoProvider);
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -107,9 +110,11 @@ class HomePage extends StatelessWidget {
               ),
               Gap(20),
               ListView.builder(
-                itemCount: 1,
+                itemCount: todoData.value!.length,
                 shrinkWrap: true,
-                itemBuilder: (context, index) => CardTodoWidget(),
+                itemBuilder: (context, index) => CardTodoWidget(
+                  getIndex: index,
+                ),
               ),
             ],
           ),

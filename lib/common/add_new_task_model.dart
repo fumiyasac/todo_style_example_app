@@ -221,6 +221,7 @@ class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
                         category: category,
                         dateTask: date,
                         timeTask: time,
+                        isDone: false,
                       )
                     );
                     ref.read(radioProvider.notifier).update((state) => 0);
