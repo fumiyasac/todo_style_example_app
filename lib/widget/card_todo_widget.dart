@@ -58,12 +58,20 @@ class CardTodoWidget extends ConsumerWidget {
                     children: [
                       ListTile(
                         contentPadding: EdgeInsets.zero,
+                        leading: IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () => ref.read(todoProvider).deleteTask(todoData[getIndex].docID),
+                        ),
                         title: Text(todoData[getIndex].titleTask,
                           maxLines: 1,
+                          style: TextStyle(
+                            decoration: todoData[getIndex].isDone ? TextDecoration.lineThrough : null,
+                          ),
                         ),
                         subtitle: Text(todoData[getIndex].description,
                           maxLines: 1,
                           style: TextStyle(
+                            decoration: todoData[getIndex].isDone ? TextDecoration.lineThrough : null,
                             color: Colors.grey,
                           ),
                         ),
