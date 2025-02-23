@@ -11,17 +11,28 @@ import 'package:todo_style_example_app/provider/date_time_provider.dart';
 import 'package:todo_style_example_app/provider/radio_provider.dart';
 import 'package:todo_style_example_app/provider/todo_provider.dart';
 
-class AddNewTaskModel extends ConsumerWidget {
-  AddNewTaskModel({
-    super.key
-  });
+class AddNewTaskModel extends ConsumerStatefulWidget {
+  const AddNewTaskModel({super.key});
+
+  @override
+  AddNewTaskModelState createState() => AddNewTaskModelState();
+}
+
+class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
 
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final date = ref.watch(dateProvider);
     final time = ref.watch(timeProvider);
     final todo = ref.watch(todoProvider);
