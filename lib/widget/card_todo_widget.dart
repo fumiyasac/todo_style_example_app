@@ -16,6 +16,7 @@ class CardTodoWidget extends ConsumerWidget {
     final todoData = ref.watch(fetchStreamTodoProvider);
     return todoData.when(
       data: (todoData) => Container(
+        margin: EdgeInsets.symmetric(vertical: 4),
         width: double.infinity,
         height: 120,
         decoration: BoxDecoration(
@@ -44,7 +45,11 @@ class CardTodoWidget extends ConsumerWidget {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       title: Text(todoData[getIndex].titleTask),
-                      subtitle: Text(todoData[getIndex].description),
+                      subtitle: Text(todoData[getIndex].description,
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
                       trailing: Transform.scale(
                         scale: 1.5,
                         child: Checkbox(
