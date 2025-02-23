@@ -13,80 +13,95 @@ class CardTodoWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Color categoryColor = Colors.white;
     final todoData = ref.watch(fetchStreamTodoProvider);
     return todoData.when(
-      data: (todoData) => Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
-        width: double.infinity,
-        height: 120,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  bottomLeft: Radius.circular(12),
+      data: (todoData) {
+        final getCategory = todoData[getIndex].category;
+        switch (getCategory) {
+          case 'Learning':
+            categoryColor = Colors.green;
+            break;
+          case 'Working':
+            categoryColor = Colors.blue.shade700;
+            break;
+          case 'General':
+            categoryColor = Colors.amber.shade700;
+            break;
+        }
+        return Container(
+          margin: EdgeInsets.symmetric(vertical: 4),
+          width: double.infinity,
+          height: 120,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: categoryColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    bottomLeft: Radius.circular(12),
+                  ),
+                ),
+                width: 20,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(todoData[getIndex].titleTask),
+                        subtitle: Text(todoData[getIndex].description,
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        trailing: Transform.scale(
+                          scale: 1.5,
+                          child: Checkbox(
+                            activeColor: Colors.blue.shade800,
+                            shape: CircleBorder(),
+                            value: todoData[getIndex].isDone,
+                            onChanged: (value) => print(value),
+                          ),
+                        ),
+                      ),
+                      Transform.translate(
+                        offset: Offset(0, -12),
+                        child: Container(
+                          child: Column(
+                            children: [
+                              Divider(
+                                thickness: 1.5,
+                                color: Colors.grey.shade200,
+                              ),
+                              Row(
+                                children: [
+                                  Text(todoData[getIndex].dateTask),
+                                  Gap(12),
+                                  Text(todoData[getIndex].timeTask),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              width: 20,
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(todoData[getIndex].titleTask),
-                      subtitle: Text(todoData[getIndex].description,
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      trailing: Transform.scale(
-                        scale: 1.5,
-                        child: Checkbox(
-                          activeColor: Colors.blue.shade800,
-                          shape: CircleBorder(),
-                          value: todoData[getIndex].isDone,
-                          onChanged: (value) => print(value),
-                        ),
-                      ),
-                    ),
-                    Transform.translate(
-                      offset: Offset(0, -12),
-                      child: Container(
-                        child: Column(
-                          children: [
-                            Divider(
-                              thickness: 1.5,
-                              color: Colors.grey.shade200,
-                            ),
-                            Row(
-                              children: [
-                                Text(todoData[getIndex].dateTask),
-                                Gap(12),
-                                Text(todoData[getIndex].timeTask),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      },
       error: (error, stackTrace) => Center(
         child: Text(stackTrace.toString()),
       ),
