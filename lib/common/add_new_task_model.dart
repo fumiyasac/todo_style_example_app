@@ -98,7 +98,7 @@ class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
                   titleRadio: "LRN",
                   categoryColor: Colors.green,
                   valueInput: 1,
-                  onChangeValue: () => ref.read(radioProvider.notifier).update((state) => 1),
+                  onChangeValue: () => ref.read(radioProvider.notifier).update(1),
                 ),
               ),
               Expanded(
@@ -106,7 +106,7 @@ class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
                   titleRadio: "WRK",
                   categoryColor: Colors.blue.shade700,
                   valueInput: 2,
-                  onChangeValue: () => ref.read(radioProvider.notifier).update((state) => 2),
+                  onChangeValue: () => ref.read(radioProvider.notifier).update(2),
                 ),
               ),
               Expanded(
@@ -114,7 +114,7 @@ class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
                   titleRadio: "GEN",
                   categoryColor: Colors.amberAccent.shade700,
                   valueInput: 3,
-                  onChangeValue: () => ref.read(radioProvider.notifier).update((state) => 3),
+                  onChangeValue: () => ref.read(radioProvider.notifier).update(3),
                 ),
               ),
             ],
@@ -224,7 +224,7 @@ class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
                         isDone: false,
                       )
                     );
-                    ref.read(radioProvider.notifier).update((state) => 0);
+                    ref.read(radioProvider.notifier).update(0);
                     ref.read(dateProvider.notifier).update((state) => "dd/mm/yy");
                     ref.read(timeProvider.notifier).update((state) => "hh : mm");
                     Navigator.pop(context);
