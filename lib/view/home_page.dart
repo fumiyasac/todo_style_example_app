@@ -11,6 +11,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todoData = ref.watch(fetchStreamTodoProvider);
+    // final todo = ref.watch(todoProvider);
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -109,6 +110,18 @@ class HomePage extends ConsumerWidget {
                 ],
               ),
               Gap(20),
+              // StreamBuilder(
+              //   stream: todo.fetchTasks(),
+              //   builder: (context, snapshot) {
+              //     return ListView.builder(
+              //       itemCount: snapshot.data?.length ?? 0,
+              //       shrinkWrap: true,
+              //       itemBuilder: (context, index) => CardTodoWidget(
+              //         getIndex: index,
+              //       ),
+              //     );
+              //   }
+              // ),
               ListView.builder(
                 itemCount: todoData.value?.length ?? 0,
                 shrinkWrap: true,
