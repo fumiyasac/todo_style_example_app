@@ -137,7 +137,7 @@ class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
                     final format = DateFormat.yMd();
                     ref
                       .read(dateProvider.notifier)
-                      .update((state) => format.format(getDate));
+                      .update(format.format(getDate));
                   }
                 },
               ),
@@ -154,7 +154,7 @@ class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
                   if (getTime != null) {
                       ref
                         .read(timeProvider.notifier)
-                        .update((state) => getTime.format(context));
+                        .update(getTime.format(context));
                   }
                 }
               ),
@@ -225,8 +225,8 @@ class AddNewTaskModelState extends ConsumerState<AddNewTaskModel> {
                       )
                     );
                     ref.read(radioProvider.notifier).update(0);
-                    ref.read(dateProvider.notifier).update((state) => "dd/mm/yy");
-                    ref.read(timeProvider.notifier).update((state) => "hh : mm");
+                    ref.read(dateProvider.notifier).update("dd/mm/yy");
+                    ref.read(timeProvider.notifier).update("hh : mm");
                     Navigator.pop(context);
                   },
                   child: Text('Create'),
