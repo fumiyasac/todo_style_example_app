@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_style_example_app/model/todo_model.dart';
 import 'package:todo_style_example_app/repository/todo_repository.dart';
 
-final todoProvider = StateProvider<TodoRepository>((ref) {
-  return TodoRepository();
-});
+final todoProvider = NotifierProvider<TodoRepositoryNotifier, TodoRepository>(TodoRepositoryNotifier.new);
+class TodoRepositoryNotifier extends Notifier<TodoRepository> {
+  @override
+  TodoRepository build() => TodoRepository();
+}
 
 final fetchStreamTodoProvider = StreamProvider<List<TodoModel>>((ref) async* {
   final getData = FirebaseFirestore.instance
