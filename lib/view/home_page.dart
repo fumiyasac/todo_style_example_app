@@ -113,42 +113,39 @@ class HomePage extends ConsumerWidget {
               StreamBuilder(
                 stream: todo.fetchTasks(),
                 builder: (context, snapshot) {
-                  return ListView.builder(
-                    itemCount: snapshot.data?.length ?? 0,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      if (snapshot.hasError) {
-                        // MEMO: Error発生時の表示処理
-                        return Center(
-                          child: Text(snapshot.error.toString()),
-                        );
-                      } else if (!snapshot.hasData) {
-                        // MEMO: Loading状態時の表示処理
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else {
-                        // MEMO: データ取得成功時の表示処理
-                        List<TodoModel> todoModelList = snapshot.data ?? List.empty();
-                        if (todoModelList.isNotEmpty) {
-                          TodoModel todoData = todoModelList[index];
-                          return CardTodoWidget(
-                            todoModel: todoData,
-                            onDeleteButtonPressed: () {
-                              todo.deleteTask(todoData.docID);
-                            },
-                            onDoneStatusChenge: (bool isDone) {
-                              todo.updateTask(todoData.docID, isDone);
-                            },
-                          );
-                        } else {
-                          return Center(
-                            child: Text("NO Data Found."),
-                          );
+                  if (snapshot.hasError) {
+                    // MEMO: Error発生時の表示処理
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  } else if (!snapshot.hasData) {
+                    // MEMO: Loading状態時の表示処理
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return ListView.builder(
+                        itemCount: snapshot.data?.length ?? 0,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          // MEMO: データ取得成功時の表示処理
+                          List<TodoModel> todoModelList = snapshot.data ?? List
+                              .empty();
+                          if (todoModelList.isNotEmpty) {
+                            TodoModel todoData = todoModelList[index];
+                            return CardTodoWidget(
+                              todoModel: todoData,
+                              onDeleteButtonPressed: () {
+                                todo.deleteTask(todoData.docID);
+                              },
+                              onDoneStatusChenge: (bool isDone) {
+                                todo.updateTask(todoData.docID, isDone);
+                              },
+                            );
+                          }
                         }
-                      }
-                    },
-                  );
+                    );
+                  }
                 }
               ),
             ],
