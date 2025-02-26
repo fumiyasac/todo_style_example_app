@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:todo_style_example_app/common/add_new_task_model.dart';
+import 'package:todo_style_example_app/model/todo_model.dart';
 import 'package:todo_style_example_app/provider/todo_provider.dart';
 import 'package:todo_style_example_app/widget/card_todo_widget.dart';
 
@@ -10,8 +11,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todoData = ref.watch(fetchStreamTodoProvider);
-    // final todo = ref.watch(todoProvider);
+    final todo = ref.watch(todoProvider);
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -110,24 +110,46 @@ class HomePage extends ConsumerWidget {
                 ],
               ),
               Gap(20),
-              // StreamBuilder(
-              //   stream: todo.fetchTasks(),
-              //   builder: (context, snapshot) {
-              //     return ListView.builder(
-              //       itemCount: snapshot.data?.length ?? 0,
-              //       shrinkWrap: true,
-              //       itemBuilder: (context, index) => CardTodoWidget(
-              //         getIndex: index,
-              //       ),
-              //     );
-              //   }
-              // ),
-              ListView.builder(
-                itemCount: todoData.value?.length ?? 0,
-                shrinkWrap: true,
-                itemBuilder: (context, index) => CardTodoWidget(
-                  getIndex: index,
-                ),
+              StreamBuilder(
+                stream: todo.fetchTasks(),
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    itemCount: snapshot.data?.length ?? 0,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      if (snapshot.hasError) {
+                        // MEMO: Error発生時の表示処理
+                        return Center(
+                          child: Text(snapshot.error.toString()),
+                        );
+                      } else if (!snapshot.hasData) {
+                        // MEMO: Loading状態時の表示処理
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        // MEMO: データ取得成功時の表示処理
+                        List<TodoModel> todoModelList = snapshot.data ?? List.empty();
+                        if (todoModelList.isNotEmpty) {
+                          TodoModel todoData = todoModelList[index];
+                          return CardTodoWidget(
+                            todoModel: todoData,
+                            onDeleteButtonPressed: () {
+                              todo.deleteTask(todoData.docID);
+                            },
+                            onDoneStatusChenge: (bool isDone) {
+                              todo.updateTask(todoData.docID, isDone);
+                            },
+                          );
+                        } else {
+                          return Center(
+                            child: Text("NO Data Found."),
+                          );
+                        }
+                      }
+                    },
+                  );
+                }
               ),
             ],
           ),

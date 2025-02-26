@@ -4,13 +4,12 @@ import 'package:todo_style_example_app/model/todo_model.dart';
 class TodoRepository {
   final todoCollection = FirebaseFirestore.instance.collection('todoApp');
 
-  // MEMO: Todoリポジトリに集約する場合はこの様な感じになる。
-  // Stream<List<TodoModel>> fetchTasks() {
-  //   return todoCollection.snapshots()
-  //     .map((event) =>
-  //       event.docs.map((snapshot) => TodoModel.fromSnapshot(snapshot)).toList()
-  //     );
-  // }
+  Stream<List<TodoModel>> fetchTasks() {
+    return todoCollection.snapshots()
+      .map((event) =>
+        event.docs.map((snapshot) => TodoModel.fromSnapshot(snapshot)).toList()
+      );
+  }
 
   void addNewTask(TodoModel model) {
     todoCollection.add(model.toMap());
