@@ -32,18 +32,6 @@ class TodoModel {
     };
   }
 
-  factory TodoModel.fromMap(Map<String, dynamic> map) {
-    return TodoModel(
-      docID: map['docID'] != null ? map['docID'] as String : null,
-      titleTask: map['titleTask'] as String,
-      description: map['description'] as String,
-      category: map['category'] as String,
-      dateTask: map['dateTask'] as String,
-      timeTask: map['timeTask'] as String,
-      isDone: map['isDone'] as bool,
-    );
-  }
-
   factory TodoModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     return TodoModel(
       docID: doc.id,
