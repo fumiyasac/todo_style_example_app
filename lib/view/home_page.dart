@@ -125,25 +125,25 @@ class HomePage extends ConsumerWidget {
                     );
                   } else {
                     return ListView.builder(
-                        itemCount: snapshot.data?.length ?? 0,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          // MEMO: データ取得成功時の表示処理
-                          List<TodoModel> todoModelList = snapshot.data ?? List
-                              .empty();
-                          if (todoModelList.isNotEmpty) {
-                            TodoModel todoData = todoModelList[index];
-                            return CardTodoWidget(
-                              todoModel: todoData,
-                              onDeleteButtonPressed: () {
-                                todo.deleteTask(todoData.docID);
-                              },
-                              onDoneStatusChenge: (bool isDone) {
-                                todo.updateTask(todoData.docID, isDone);
-                              },
-                            );
-                          }
+                      itemCount: snapshot.data?.length ?? 0,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        // MEMO: データ取得成功時の表示処理
+                        List<TodoModel> todoModelList = snapshot.data ?? List
+                            .empty();
+                        if (todoModelList.isNotEmpty) {
+                          TodoModel todoData = todoModelList[index];
+                          return CardTodoWidget(
+                            todoModel: todoData,
+                            onDeleteButtonPressed: () {
+                              todo.deleteTask(todoData.docID);
+                            },
+                            onDoneStatusChenge: (bool isDone) {
+                              todo.updateTask(todoData.docID, isDone);
+                            },
+                          );
                         }
+                      }
                     );
                   }
                 }
