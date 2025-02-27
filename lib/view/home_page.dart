@@ -62,7 +62,7 @@ class HomePage extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             children: [
-              const Gap(20),
+              Gap(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
